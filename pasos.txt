@@ -1,0 +1,98 @@
+Para instalar
+sudo apt-get update
+sudo apt-get install nodejs
+sudo apt-get install npm
+sudo npm install -g ember-cli
+sudo npm install -g bower
+
+Para crear nuevo proyecto 
+ember new "nombre de proyecto"
+
+Si sale error 
+sudo ln -s /usr/bin/nodejs /usr/bin/node
+
+Ingresamos a la carpeta del proyecto 
+cd ember-blog
+
+Instalamos bootstrap en el proyecto
+bower install --save-dev bootstrap
+
+En el archivo ember-cli-build.js
+ 
+app.import('bower_components/bootstrap/dist/css/bootstrap.min.css');
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Ember Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="#">Posts</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  {{outlet}}
+</div>
+
+-----------------------------------------------
+En router.js
+this.route('about');
+    this.resource('posts');
+
+--------------------------------------------------
+
+ <li>{{#link-to 'posts'}}Posts{{/link-to}}</li>
+        <li>{{#link-to 'about'}}About{{/link-to}}</li>
+
+En about.hbs
+
+<div class= “about”>
+<p> Dojo de Ember en clase de Desarrollo</p>
+</div>
+
+
+body {
+    padding-top: 70px;
+}
+
+nav .active{
+    font-weight: bold;
+}
+
+
+en el nuevo arcgivo de index.hbs
+ <div class="home">
+<h1> Mi primer app</h1>
+<p> en ember</p>
+</div>
+
+
+en el archivo adapters/application.js
+import DS from 'ember-data';
+
+export default DS.RESTAdapter.reopen({
+namespace: 'api'
+});
+
+
+en el archivo models/post.js
+import DS from 'ember-data';
+
+export default Ds.Model.extend({
+        title: DS.attr('string')
+});
+
+en routes/posts.js
+
+
